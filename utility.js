@@ -1,7 +1,8 @@
 "use strict"
+var fs = require('fs')
 module.exports =
 {
-    link : function(array,word)
+    unorderedlist : function(array,word)
     {
     class Node {
         // constructor
@@ -170,7 +171,6 @@ module.exports =
         }
         return -1;
     }
-
     printList()
     {
         var curr = this.head;
@@ -180,6 +180,7 @@ module.exports =
             curr = curr.next;
         }
         console.log(str);
+        return str;
     }
     }
       // creating an object for the
@@ -192,58 +193,177 @@ module.exports =
     if(ll.indexOf(word)==-1)
     {
         ll.add(word)
-    }
+    }    
     else{
         ll.removeElement(word)
     }
-    ll.printList() 
+    var res = ll.printList() 
+
+    fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/intFile.txt',res)
+    //ll.printList();
+},
+   orderedList : function(array, number)
+   {
+array.sort(function(a,b)
+{
+return a-b
+})
+console.log(array)
+this.unorderedlist(array,number)
+array.sort(function(a,b)
+{
+    return a-b
+})
+console.log(array)
+   },
+   balance : function(expr)
+   {
+   class Stack {
+ 
+    // Array is used to implement stack
+    constructor()
+    {
+        this.items = [];
+    }
+    push(element)
+{
+    // push element into the items
+    this.items.push(element);
+}
+pop()
+{
+    // return top most element in the stack
+    // and removes it from the stack
+    // Underflow if stack is empty
+    if (this.items.length == 0)
+        return "Underflow";
+    return this.items.pop();
+}
+// peek function
+peek()
+{
+    // return the top most element from the stack
+    // but doesn't delete it.
+    return this.items[this.items.length - 1];
+}
+isEmpty()
+{
+    // return true if stack is empty
+    return this.items.length == 0;
+}
+// printStack function
+printStack()
+{
+    var str = ""; 
+    for (var i = 0; i < this.items.length; i++)
+        str += this.items[i] + " ";
+    return str;
+}
+}
+var stack = new Stack()
+var count = 0 , flag =0, a=0;
+for (var i=0; i<expr.length; i++)
+    {
+        if (expr[i]=='(' ) 
+        {
+            // Push the element in the stack
+            stack.push('(');
+            count ++;
+        }
+        else if(expr[i]==')')
+        {
+            stack.pop()
+            flag++;
+        }
+    }
+ if(count == flag)
+ {
+     console.log(' Balanced ' )
+ }
+ else
+ {
+     console.log(" UnBalanced ")
+ }
+},
+cashCounter : function()
+{
+    class Queue
+{
+    // Array is used to implement a Queue
+    constructor()
+    {
+        this.items = [];
+    }
+    enqueue(element)
+    {    
+        // adding element to the queue
+        this.items.push(element);
+    }
+    dequeue()
+{
+    // removing element from the queue
+    // returns underflow when called 
+    // on empty queue
+    if(this.isEmpty())
+        return "Underflow";
+    return this.items.shift();
+}
+front()
+{
+    // returns the Front element of 
+    // the queue without removing it.
+    if(this.isEmpty())
+        return "No elements in Queue";
+    return this.items[0];
+}
+isEmpty()
+{
+    // return true if the queue is empty.
+    return this.items.length == 0;
+}
+printQueue()
+{
+    var str = "";
+    for(var i = 0; i < this.items.length; i++)
+        str += this.items[i] +" ";
+    return str;
+}
+}
+
+var queue = new Queue();
+// Testing dequeue and pop on an empty queue
+// returns Underflow
+console.log(queue.dequeue());
+ 
+// returns true
+console.log(queue.isEmpty());
+ 
+// Adding elements to the queue
+// queue contains [10, 20, 30, 40, 50]
+queue.enqueue(10);
+queue.enqueue(20);
+queue.enqueue(30);
+queue.enqueue(40);
+queue.enqueue(50);
+queue.enqueue(60);
+ 
+// returns 10
+console.log(queue.front());
+ 
+// removes 10 from the queue
+// queue contains [20, 30, 40, 50, 60]
+console.log(queue.dequeue());
+ 
+// returns 20
+console.log(queue.front());
+ 
+// removes 20
+// queue contains [30, 40, 50, 60]
+console.log(queue.dequeue());
+ 
+// printing the elements of the queue
+// prints [30, 40, 50, 60]
+console.log(queue.printQueue())
 },
 }
-    /* 
-    // testing isEmpty on an empty list
-    // returns true
-    console.log(ll.isEmpty());
-     
-    // adding element to the list
-    ll.add(10);
-     
-    // prints 10
-    ll.printList();
-     
-    // returns 1
-    console.log(ll.size_of_list());
-     
-    // adding more elements to the list
-    ll.add(20);
-    ll.add(30);
-    ll.add(40);
-    ll.add(50);
-     ll.add('kumar') 
-    // returns 10 20 30 40 50
-    ll.printList();
-     
-    // prints 50 from the list
-    console.log("is element removed ? "  + ll.removeElement(50));
-     
-    // prints 10 20 30 40
-    ll.printList();
-     
-    // returns 3
-    console.log("Index of 40 is " + ll.indexOf(40));
-     
-    // insert 60 at second positon
-    // ll contains 10 20 60 30 40
-    ll.insertAt(60, 2);
-     
-    ll.printList();
-     
-    // returns false
-    console.log("is List Empty ? " + ll.isEmpty());
-     
-    // remove 3rd element from the list
-    console.log(ll.removeFrom(3));
-     
-    // prints 10 20 60 40
-    ll.printList();
-    */
- 
+

@@ -2,16 +2,11 @@
 var fs = require('fs')
 var prompt = require('prompt-sync')()
 var utility= require('/home/bridgeit/Documents/kumar/DataStructures/utility/utility.js')
-
-var data = fs.readFileSync('file.txt')
+var data = fs.readFileSync('intFile.txt')
 data =data.toString().split(' ')
-function link()
+function orderedList()
 {
-    var word = prompt('Enter the word u want to search : ')  
-    utility.link(data, word)
+    var number = prompt('Enter the number u want to search : ')  
+    utility.orderedList(data, number)
 }
-link()
-
-
-
-
+orderedList()
