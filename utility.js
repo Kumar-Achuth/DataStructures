@@ -84,7 +84,8 @@ module.exports =
     {
         if (index > 0 && index > this.size)
             return false;
-        else {
+        else 
+        {
             // creates a new node
             var node = new Node(element);
             var curr, prev;
@@ -102,12 +103,12 @@ module.exports =
      
                 // iterate over the list to find
                 // the position to insert
-                while (it < index) {
+                while (it < index)
+                 {
                     it++;
                     prev = curr;
                     curr = curr.next;
                 }
-     
                 // adding an element
                 node.next = curr;
                 prev.next = node;
@@ -199,7 +200,7 @@ module.exports =
     }
     var res = ll.printList() 
 
-    fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/intFile.txt',res)
+    fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/file.txt',res)
     //ll.printList();
 },
    orderedList : function(array, number)
@@ -285,7 +286,7 @@ for (var i=0; i<expr.length; i++)
      console.log(" UnBalanced ")
  }
 },
-cashCounter : function()
+cashCounter : function(number)
 {
     class Queue
 {
@@ -328,42 +329,101 @@ printQueue()
         str += this.items[i] +" ";
     return str;
 }
+length()
+{
+    return this.items.length;
+}
+}
+var prompt = require('prompt-sync')()
+var queue = new Queue();;
+        var mainBalance= 125000;
+
+        for(var i=0; i<number; i++)
+        {
+            queue.enqueue(i);
+        }
+        console.log(queue.length());
+
+        while(queue.length())
+        {
+            var choice= prompt("Enter 1 to withdraw and 2 to deposit amount: ");
+            if(choice==1) 
+            {
+                var amount=prompt("Enter the amount to be withdrawn: ");
+                if(mainBalance>=amount)
+                {
+                    mainBalance=parseInt(mainBalance)-parseInt(amount);
+                    console.log("Current Available balanace= "+mainBalance+" rs");
+                }else{
+                    console.log("Please check your balance");
+                    process.exit();
+                }
+            }
+            else if(choice==2)
+            {
+                var amount=prompt("Enter the amount to be deposited: ");
+                mainBalance=parseInt(mainBalance)+parseInt(amount);
+                console.log("Total available balanace= "+mainBalance+" rs");
+            }
+            else{
+                console.log("Could not proceeed ");
+                break;
+            }
+            queue.dequeue();
+            console.log('Current people in the queue are ' +queue.length())
+        } 
+    },
+    palindromeChecker : function(string)
+    {
+        function Deque()
+        {
+         this.items=new Array();
+         this.popback=function(){
+          return this.items.pop();
+         }
+         this.pushback=function(element){
+          this.items.push(element);
+         }
+         this.popfront=function(){
+          return this.items.shift();
+         }
+         this.pushfront=function(element){
+          this.items.unshift(element);
+         }
+        this.printQueue=function()
+{
+    var str = "";
+    for(var i = 0; i < this.items.length; i++)
+        str += this.items[i] +" ";
+    return str;
+}
+this.len=function()
+{
+    return this.items.length
+}
+        }
+         var deque = new Deque()
+         string= string.toLowerCase()
+         for (var i=0; i<string.length; i++)
+         {
+             deque.pushfront(string[i])
+         }
+         
+         var count =0 ; 
+         console.log(deque.printQueue())
+         while(deque.len())
+         {
+             if(deque.popfront()===deque.popback())
+             {
+                 count ++
+             }
+         }
+         if(count == Math.floor(string.length/2))
+         console.log('The given string is a palindrome ')
+         else
+         console.log('Not a palindrome ')
+    },
 }
 
-var queue = new Queue();
-// Testing dequeue and pop on an empty queue
-// returns Underflow
-console.log(queue.dequeue());
- 
-// returns true
-console.log(queue.isEmpty());
- 
-// Adding elements to the queue
-// queue contains [10, 20, 30, 40, 50]
-queue.enqueue(10);
-queue.enqueue(20);
-queue.enqueue(30);
-queue.enqueue(40);
-queue.enqueue(50);
-queue.enqueue(60);
- 
-// returns 10
-console.log(queue.front());
- 
-// removes 10 from the queue
-// queue contains [20, 30, 40, 50, 60]
-console.log(queue.dequeue());
- 
-// returns 20
-console.log(queue.front());
- 
-// removes 20
-// queue contains [30, 40, 50, 60]
-console.log(queue.dequeue());
- 
-// printing the elements of the queue
-// prints [30, 40, 50, 60]
-console.log(queue.printQueue())
-},
-}
+
 

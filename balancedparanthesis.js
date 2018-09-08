@@ -5,6 +5,5 @@ function balance()
 {
     var expr = prompt('Enter the expression : ')
         utility.balance(expr)
-    
 }
 balance()
