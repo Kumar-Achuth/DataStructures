@@ -607,7 +607,7 @@ this.len=function()
                 }
         }
         var i;
-        var arr=[],a1=[],a2=[],a3=[],a4=[],a5=[],a6=[],a7=[],a8=[],a9=[]
+        var  a10=[],a11=[],a1=[],a2=[],a3=[],a4=[],a5=[],a6=[],a7=[],a8=[],a9=[]
         var row =10;
         var ll = new LinkedList();        
         console.log(array)
@@ -617,11 +617,11 @@ this.len=function()
                     var reminder = parseInt(array[j]%11);
                     if (reminder == 0 )  
                     {
-                         ll.add(array[j])
+                         a10.push(array[j])
                     }
                     else if(reminder == 1)
                     {
-                        arr.push(array[j])
+                        a11.push(array[j])
                     }
                     else if(reminder == 2)
                     {
@@ -660,17 +660,34 @@ this.len=function()
                             a9.push(array[j])
                     }
             }
-        console.log('Slot 0 is : '+(ll.printList()))
-              console.log('Slot 1 is : '+arr)
-              console.log('Slot 2 is : '+a1)
-              console.log('Slot 3 is : '+a2)
-              console.log('Slot 4 is : '+a3)
-              console.log('Slot 5 is : '+a4)
-              console.log('Slot 6 is : '+a5)
-              console.log('Slot 7 is : '+a6)
-              console.log('Slot 8 is : '+a7)
-              console.log('Slot 9 is : '+a8)
-              console.log('Slot 10 is : '+a9)
+            var array1 = [];
+            array1.push(a10);
+            array1.push(a11);
+            array1.push(a1);
+            array1.push(a2);
+            array1.push(a3);
+            array1.push(a4);
+            array1.push(a5);
+            array1.push(a6);
+            array1.push(a7);
+            array1.push(a8);
+            array1.push(a9);
+        // console.log('Slot 0 is : '+a10);
+        //       console.log('Slot 1 is : '+arr)
+        //       console.log('Slot 2 is : '+a1)
+        //       console.log('Slot 3 is : '+a2)
+        //       console.log('Slot 4 is : '+a3)
+        //       console.log('Slot 5 is : '+a4)
+        //       console.log('Slot 6 is : '+a5)
+        //       console.log('Slot 7 is : '+a6)
+        //       console.log('Slot 8 is : '+a7)
+        //       console.log('Slot 9 is : '+a8)
+        //       console.log('Slot 10 is : '+a9)
+
+        for(var k=0;k<array1.length;k++)
+        {
+            console.log("Slot "+k+" --> "+array1[k].join('-->'));
+        }
                 },         
 
     checkPrime : function(min1,max1) { 
