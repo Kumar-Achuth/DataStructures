@@ -2,6 +2,12 @@
 var fs = require('fs')
 module.exports =
 {
+    /**
+ * @description : ­> Read the Text from a file, split it into words and arrange it as Linked List.
+Take a user input to search a Word in the List. If the Word is not found then add it
+to the list, and if it found then remove the word from the List. In the end save the
+list into a file
+ */
     unorderedlist : function(array,word)
     {
     class Node {
@@ -148,6 +154,45 @@ module.exports =
             return curr.element;
         }
     }
+    sortList() {
+
+        var swap;
+        var current = this.head;
+        var current1 = current.next;
+        var n = this.size;
+
+        for (let i = 0; i < n; i++) {
+
+            for (let j = 0; j < n - i - 1; j++) {
+
+                if (parseInt(current1.element) < parseInt(current.element)) {
+
+                    swap = current.element;
+
+                    current.element = current1.element;
+
+                    current1.element = swap;
+
+                }
+
+                if (current1.next != null) {
+
+                    current = current1;
+
+                    current1 = current1.next;
+
+                }
+
+            }
+
+            current = this.head;
+
+            current1 = current.next;
+        }
+
+        console.log('List sorted');
+    }
+
     removeElement(element)
     {
         var current = this.head;
@@ -198,11 +243,17 @@ module.exports =
     else{
         ll.removeElement(word)
     }
+    ll.sortList()
     var res = ll.printList() 
 
-    fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/file.txt',res)
+    fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/intFile.txt',res)
     //ll.printList();
 },
+/**
+ * @description : ­ Read a List of Numbers from a file and arrange it ascending Order in a
+Linked List. Take user input for a number, if found then pop the number out of the
+list else insert the number in appropriate position
+ */
    orderedList : function(array, number)
    {
 array.sort(function(a,b)
@@ -215,10 +266,14 @@ array.sort(function(a,b)
 {
     return a-b
 })
-console.log(array)
+  // console.log(array)
    },
-
-
+/**
+ * @description : ­> Take an Arithmetic Expression such as
+(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3) where parentheses are used to order the
+performance of operations. Ensure parentheses must appear in a balanced
+fashion.
+ */
    balance : function(expr)
    {
    class Stack {
@@ -288,6 +343,12 @@ for (var i=0; i<expr.length; i++)
      console.log(" UnBalanced ")
  }
 },
+/**
+ * @description : Create a Program which creates Banking Cash Counter where people
+come in to deposit Cash and withdraw Cash. Have an input panel to add people
+to Queue to either deposit or withdraw money and dequeue the people. Maintain
+the Cash Balance.
+ */
 cashCounter : function(number)
 {
     class Queue
@@ -339,6 +400,7 @@ length()
 var prompt = require('prompt-sync')()
 var queue = new Queue();;
         var mainBalance= 125000;
+        console.log('The Main Balance in the account is ' + mainBalance)
 
         for(var i=0; i<number; i++)
         {
@@ -375,6 +437,11 @@ var queue = new Queue();;
             console.log('Current people in the queue are ' +queue.length())
         } 
     },
+    /**
+ * @description : A palindrome is a string that reads the same forward and backward, for
+example, radar, toot, and madam. We would like to construct an algorithm to
+input a string of characters and check whether it is a palindrome.
+ */
     palindromeChecker : function(string)
     {
         function Deque()
@@ -425,8 +492,13 @@ this.len=function()
          else
          console.log('Not a palindrome ')
     },
-    hashing : function(array, number)
+    /**
+ * @description : Create a Slot of 10 to store Chain of Numbers that belong to each Slot to
+efficiently search a number from a given set of number
+ */
+    hashing : function(array)
     {
+        var prompt = require('prompt-sync')()
         class Node {
             // constructor
             constructor(element)
@@ -608,10 +680,31 @@ this.len=function()
         }
         var i;
         var  a10=[],a11=[],a1=[],a2=[],a3=[],a4=[],a5=[],a6=[],a7=[],a8=[],a9=[]
-        var row =10;
-        var ll = new LinkedList();        
-        console.log(array)
-        var arr = new Array(row) ;
+        var list = new LinkedList();        
+        var hash = fs.readFileSync('hashfile.txt');
+    hash = hash.toString().split(" ");
+    var arr = Array.from(hash);
+    arr.sort();
+    console.log(arr);
+    var val = prompt("Please enter a value to search: ");
+    for(var i=0;i<hash.length;i++)
+    {
+        list.add(hash[i]);
+    }
+    list.printList();
+    var result = list.indexOf(val);
+    console.log('The index of ' + val + ' is ' +list.indexOf(val) )
+    if(result == -1)
+    {
+        console.log("Element not found!!");
+       list.add(val);
+    }
+    else
+    {
+        console.log("Element found!!");       
+        list.removeElement(val);
+    }
+        console.log(list.printList())
         for(var j =0 ; j<array.length; j++ )
         {
                     var reminder = parseInt(array[j]%11);
@@ -672,24 +765,19 @@ this.len=function()
             array1.push(a7);
             array1.push(a8);
             array1.push(a9);
-        // console.log('Slot 0 is : '+a10);
-        //       console.log('Slot 1 is : '+arr)
-        //       console.log('Slot 2 is : '+a1)
-        //       console.log('Slot 3 is : '+a2)
-        //       console.log('Slot 4 is : '+a3)
-        //       console.log('Slot 5 is : '+a4)
-        //       console.log('Slot 6 is : '+a5)
-        //       console.log('Slot 7 is : '+a6)
-        //       console.log('Slot 8 is : '+a7)
-        //       console.log('Slot 9 is : '+a8)
-        //       console.log('Slot 10 is : '+a9)
 
         for(var k=0;k<array1.length;k++)
         {
             console.log("Slot "+k+" --> "+array1[k].join('-->'));
         }
+        fs.writeFile('/home/bridgeit/Documents/kumar/DataStructures/main/hash2.txt', array.join('-->') , function(){})
                 },         
-
+/**
+ * @description : Take a range of 0 ­ 1000 Numbers and find the Prime numbers in that range. Store
+the prime numbers in a 2D Array, the first dimension represents the range 0­100,
+100­200, and so on. While the second dimension represents the prime numbers in
+that range
+ */
     checkPrime : function(min1,max1) { 
 
         let size = (Math.floor(max1/100) + 1);
@@ -711,36 +799,21 @@ this.len=function()
         }
     
         for(let index = range+1 ; index <= size;index++) {
-    
             if( (max-min) < 100 && max <= max1) {
-        
                 let prime = new Array();
-        
                 for(let i = min;i <= max;i++) {
                     let count = 0;
                     
                     for(let j = 1;j <= i;j++) {
-                       
-            
                         if(i % j == 0) {
-            
                             count++;
-                        }
-                        
+                        }   
                     }
-            
                     if(count <= 2) {
-            
                         prime.push(i);
-                        
-        
-                    }
-        
-                    
+                    }  
                 } 
-        
                 arr1.push(prime);
-        
                 if(max1 - max < 100) {
     
                     range = Math.floor(min/100);
@@ -748,23 +821,19 @@ this.len=function()
                     min = (min + ((range+1)*100)-min);
     
                     max = max1-1;
-    
                 }
-            
                 else {
     
                     range = Math.floor(min/100);
-            
                     min = (min + ((range+1)*100)-min);
-            
                     max = max + 100;
-            
                 }
             }  
         }
             console.log('\n Prime Numbers in the given range are :')
             console.log(arr1);
     }, 
+
     prime : function(min,max) {
 
         let prime = new Array();
@@ -777,30 +846,27 @@ this.len=function()
                 let count = 0;
                 
                 for(let j = 1;j <= i;j++) {
-                   
-    
+        
                     if(i % j == 0) {
     
                         count++;
                     }
-                    
                 }
-    
                 if(count <= 2) {
     
                     prime.push(i);
-                    
-    
-                }
-                
+                }  
             }
-    
             return prime;
-    
     },
-    
-    anagrams : function(str1,str2) {
-    
+    /**
+     * @description : Extend the Prime Number Program and store only the numbers in that range that are
+Anagrams. For e.g. 17 and 71 are both Prime and Anagrams in the 0 to 1000 range.
+Further store in a 2D Array the numbers that are Anagram and numbers that are not
+Anagram
+     */
+    anagrams : function(str1,str2)
+     {
         var arr1 = str1.split('');
         var arr2 = str2.split('');
         var array1 = this.removeSpace(arr1);
@@ -817,21 +883,15 @@ this.len=function()
                 //console.log('given strings are anagram');
                 return true;
             }
-    
             else {
                // console.log('given strings are not anagram');
                return false;
             }
-    
         }
-    
         else {
-    
             //console.log('given strings are not anagram');
             return false;
-    
         }
-    
     },
     removeSpace : function(array) {
     
@@ -841,29 +901,18 @@ this.len=function()
         if(array[i] != ' ') {
             newArray.push(array[i]);
         }
-    
      }
-    
      return newArray;
-    
     } ,
-    
     compare : function(array1,array2) {
     
-        let count = 0;
-        
-        for(let i=0;i < array1.length ;i++) {
-            
+        let count = 0; 
+        for(let i=0;i < array1.length ;i++) { 
             if(array1[i]==array2[i]) {
-    
                 count++
             }
         }
-    
         return (array1.length == count);
-    
     },
-
-    
     }
 
